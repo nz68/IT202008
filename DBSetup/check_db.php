@@ -33,6 +33,8 @@ try{
 	echo "<pre>" . var_export($r, true) . "</pre>";
 	echo "<pre>" . var_export($results, true) . "</pre>";
 	
+	$stmt = $db->prepare("UPDATE 'TestUser' SET username = :username WHERE id = :id");
+	
 	
 	
 }
