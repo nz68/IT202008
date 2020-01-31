@@ -24,7 +24,15 @@ try{
 	$stmt = $db->prepare("INSERT INTO 'Test' (username, pin) VALUES (:username, :pin)");
 	$stmt->bindValue(":username",'Bob');
 	$stmt->bindValue(":pin", 1234);
-	echo var_export($stmt->errorInfo(), true);
+	$stmt->execute($stmt);
+	echo "<pre>" . var_export($stmt->errorInfo(), true) . "</pre>";
+	echo "<br> Select query<br>";
+	$stmt = $db->prepare("SELECT id, username FROM 'TestUsers'");
+	$r = $stmt->execute();
+	$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	echo "<pre>" . var_export($r, true) . "</pre>";
+	echo "<pre>" . var_export($stmt->errorInfo(), true) . "</pre>";
+	
 	
 	
 }
