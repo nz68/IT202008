@@ -31,7 +31,7 @@ try{
 	$r = $stmt->execute();
 	$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	echo "<pre>" . var_export($r, true) . "</pre>";
-	echo "<pre>" . var_export($stmt->errorInfo(), true) . "</pre>";
+	echo "<pre>" . var_export($results, true) . "</pre>";
 	
 	
 	
