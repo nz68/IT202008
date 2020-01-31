@@ -22,9 +22,9 @@ try{
 			);
 	$stmt->execute();
 	$stmt = $db->prepare("INSERT INTO 'Test' (username, pin) VALUES (:username, :pin)");
-	echo var_export($stmt->errorInfo(), true);
 	$stmt->bindValue(":username",'Bob');
 	$stmt->bindValue(":pin", 1234);
+	echo var_export($stmt->errorInfo(), true);
 	
 	
 }
