@@ -21,7 +21,12 @@ try{
 				) CHARACTER SET utf8 COLLATE utf8_general_ci"
 			);
 	$stmt->execute();
+	$stmt = $db->prepare("INSERT INTO 'Test' (username, pin) VALUES (:username, :pin)");
 	echo var_export($stmt->errorInfo(), true);
+	$stmt->bindValue(":username",'Bob');
+	$stmt->bindValue(":pin", 1234);
+	
+	
 }
 catch(Exception $e){
 	echo $e->getMessage();
