@@ -9,6 +9,10 @@
 				console.log("Form by id", mySameForm);
 			}
 			function verifyPasswords(form){
+				if(form.password.value == 0 || form.confirm.value.length == 0){
+					alert("You must enter both a password and confirmation password");
+					return false;
+				}
 				if(form.password.value != form.confirm.value){
 					alert("Uhh you made a typo");
 					return false;
