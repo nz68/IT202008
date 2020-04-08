@@ -32,7 +32,7 @@
 
     <article>
         <header class = "text-center">
-        <h1>account</h1>
+        <h1>My Account</h1>
         </header>
     </article>
 

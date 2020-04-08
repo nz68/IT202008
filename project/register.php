@@ -34,6 +34,9 @@
             <li class="nav-item">
 			    <a class="nav-link" href="download.php">Download</a>
 		    </li>
+            <li class="nav-item">
+			    <a class="nav-link" href="buy.php">Buy</a>
+		    </li>
         </div>
     </header>
 
@@ -73,9 +76,12 @@ if(	   isset($_POST['email'])
     )
     
     {
+    $email = $_POST['email'];
 	$pass = $_POST['password'];
     $conf = $_POST['confirm'];
     $timeLeft = 0;
+    $id = uniqid();
+    $endTime = 0;
     if($pass == $conf)
     {
 		echo "All good, 'registering user'";
@@ -89,26 +95,39 @@ if(	   isset($_POST['email'])
 
 	//it's hashed
 	require("config.php");
-	$connection_string = "mysql:host=$dbhost;dbname=$dbdatabase;charset=utf8mb4";
+    $connection_string = "mysql:host=$dbhost;dbname=$dbdatabase;charset=utf8mb4";
+    
     try
     {
 		$db = new PDO($connection_string, $dbuser, $dbpass);
-		$stmt = $db->prepare("INSERT INTO `AppUsers`
-                        (email, password, timeLeft) VALUES
-                        (:email, :password, :timeLeft)");
-		$email = $_POST['email'];
-        $params = array(":email"=> $email, 
-                    ":password"=> $pass,
-                    ":timeLeft"=>$timeLeft);
+        
+        $stmt = $db->prepare("INSERT INTO `AppUsers`
+                        (id, email, password, endtime, timeLeft) VALUES
+                        (:id, :email, :password,:endtime, :timeLeft)");
+        $params = array(":id" => $id,
+                        ":email"=> $email, 
+                        ":password"=> $pass,
+                        ":endtime" => $endTime,
+                        ":timeLeft"=>$timeLeft);
         $stmt->execute($params);
-        
-        
-        
+    }
+	catch(Exception $e){
+		echo $e->getMessage();
+		exit();
+    }
+    try
+    {   
+        $initZero = NULL;
+        $stmt2 = $db->prepare("INSERT INTO `CreditCardInfo`
+                        (id, cardNum, expDate, CVV) VALUES
+                        (:id, NULL, NULL,NULL)");
+        $params2 = array(":id" => $id);
+        $stmt2->execute($params2);
+
         session_start();
         $_SESSION["email"] = ":email";
-        $_SESSION["redirect"] = "register";
-
-
+        $_SESSION["redirect"] = ":register";
+        $_SESSION["id"] = "$id";
         header("Location: account.php");
 	}
 	catch(Exception $e){

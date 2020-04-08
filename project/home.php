@@ -28,10 +28,29 @@
     </section>
     <article>
         <header class = "text-center">
-        <h1>Home</h1>
+        <h1>Hype Shop</h1>
         </header>
+	<style>
+	body	{background-color:powderblue;}
+	</style>
+	<body>
+		<div class="nav justify-content-md-center">
+			<li="nav-item"><a class="nav-link" href="newreleases.php">New Releases</a></li>
+			<li="nav-item"><a class="nav-link" href="men.php">Men</a></li>
+			<li="nav-item"><a class="nav-link" href="women.php">Women</a></li>
+		        <li="nav-item"><a class="nav-link" href="kids.php">Kids</a></li>  			        
+		</div>
+	</body>
+	<header>
+	<h1> Featured </h1>
+	</header>
+	<body>
+	<p> adidas Ultra Boost 4.0 Running White </p>
+	<p> Nike Air Force 1 </p>
+
     </article>
     <section class = "text-center">
         
     </section>
 </html>
+
